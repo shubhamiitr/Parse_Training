@@ -1,0 +1,14 @@
+{
+    "applications": { 
+        "Training":{  
+            "applicationId": "6PdBHboWXHwa3En35mAXjrZtC783NpakLhMYjsfX", 
+            "masterKey": "44lDUeotqDR3JZYRSSua53CFJfbeSFO6aA6ik1lT"
+        }, 
+        "_default": {
+            "link": "Training"
+        }
+    },
+    "global":{
+        "parseVersion": "1.4.2"
+    }
+}

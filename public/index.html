@@ -1,0 +1,67 @@
+<html>
+  <head>
+    <title>Training</title>
+      <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
+
+  </head>
+  <body>
+    <div>
+      <script type="text/javascript">
+        Parse.initialize("6PdBHboWXHwa3En35mAXjrZtC783NpakLhMYjsfX","aOeco3V5BmGXvLZvgwQ62sQEbdjLxx7kq7kfu89s");
+        
+        // Testing loadPdf function
+          Parse.Cloud.run("mailPdf",{
+              url: "http://www.analysis.im/uploads/seminar/pdf-sample.pdf"
+          },{
+            success: function(result){
+              console.log(result);
+            },
+            error: function(error){
+              console.log(error.code + ": " + error.message);
+            }
+          });
+
+        // Testing hello function
+          // Parse.Cloud.run("hello",{},{
+          //   success: function(result){
+          //     console.log(result);
+          //   },
+          //   error: function(error){
+          //     console.log("Error: " + error.message);
+          //   }
+          // });
+    
+        // Testing insertReviewWithTrigger function
+          // Parse.Cloud.run("insertReviewWithTrigger",{movie: "Tanu Weds Manu Returns", stars: 9, comment: "Good movie"},{
+          //   success: function(){
+
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + ": " + error.message);
+          //   }
+          // });
+
+        // Testing insertReview function
+          // Parse.Cloud.run("insertReview",{movie: "Tanu Weds Manu Returns", stars: 9, comment: "Good movie"},{
+          //   success: function(){
+
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + ": " + error.message);
+          //   }
+          // }); 
+
+        // Testing averageStars function
+          // Parse.Cloud.run("averageStars",{movie: "The Matrix"},{
+          //   success: function(ratings){
+          //     console.log('The average rating of "The Matrix" movie ' + ratings);
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + " " + error.message);
+          //   }
+          // });
+
+      </script>
+    </div>
+  </body>
+</html>
