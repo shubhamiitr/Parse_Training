@@ -10,21 +10,21 @@
         Parse.initialize("6PdBHboWXHwa3En35mAXjrZtC783NpakLhMYjsfX","aOeco3V5BmGXvLZvgwQ62sQEbdjLxx7kq7kfu89s");
         
         // Testing loadPdf function
-          Parse.Cloud.run("mailPdf",{
-              url: "http://www.analysis.im/uploads/seminar/pdf-sample.pdf"
-          },{
-            success: function(result){
-              console.log(result);
-            },
-            error: function(error){
-              console.log(error.code + ": " + error.message);
-            }
-          });
+          // Parse.Cloud.run("mailPdf",{
+          //     url: "http://www.analysis.im/uploads/seminar/pdf-sample.pdf"
+          // },{
+          //   success: function(result){
+          //     console.log(result);
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + ": " + error.message);
+          //   }
+          // });
 
         // Testing hello function
           // Parse.Cloud.run("hello",{},{
           //   success: function(result){
-          //     console.log(result);
+          //     alert(result);
           //   },
           //   error: function(error){
           //     console.log("Error: " + error.message);
@@ -60,7 +60,26 @@
           //     console.log(error.code + " " + error.message);
           //   }
           // });
+        
+        // Testing areaAutoComplete function
+          // Parse.Cloud.run("areaAutoComplete",{"areaPartialName": "Par"},{
+          //   success: function(results){
+          //     console.log(results);
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + " " + error.message);
+          //   }
+          // });
 
+        // Testing schoolsNearby function
+          // Parse.Cloud.run("schoolsNearby",{"areaName": "Kota"},{
+          //   success: function(results){
+          //     console.log(results);
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + " " + error.message);
+          //   }
+          // });  
       </script>
     </div>
   </body>

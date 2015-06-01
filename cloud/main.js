@@ -1,6 +1,7 @@
 var _ = require('underscore');
 var Buffer = require('buffer').Buffer;
 var Mandrill = require('mandrill');
+var schoolapi = require('cloud/school_api.js');
 
 Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
@@ -138,4 +139,12 @@ Parse.Cloud.define("mailPdf", function(request, response){
 			response.error(error);
 		}
 	});
+});
+
+Parse.Cloud.define("areaAutoComplete", function(request, response) {
+    schoolapi.areaAutoComplete(request, response);
+});
+
+Parse.Cloud.define("schoolsNearby", function(request, response) {
+    schoolapi.schoolsNearby(request, response);
 });
