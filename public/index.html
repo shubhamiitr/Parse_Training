@@ -2,7 +2,6 @@
   <head>
     <title>Training</title>
       <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.4.2.min.js"></script>
-
   </head>
   <body>
     <div>
@@ -42,14 +41,14 @@
           // });
 
         // Testing insertReview function
-          // Parse.Cloud.run("insertReview",{movie: "Tanu Weds Manu Returns", stars: 9, comment: "Good movie"},{
-          //   success: function(){
+          Parse.Cloud.run("insertReview",{movie: "Tanu Weds Manu Returns", stars: 4, comment: "Ok!"},{
+            success: function(){
 
-          //   },
-          //   error: function(error){
-          //     console.log(error.code + ": " + error.message);
-          //   }
-          // }); 
+            },
+            error: function(error){
+              console.log(error.code + ": " + error.message);
+            }
+          }); 
 
         // Testing averageStars function
           // Parse.Cloud.run("averageStars",{movie: "The Matrix"},{
@@ -80,7 +79,16 @@
           //     console.log(error.code + " " + error.message);
           //   }
           // });  
+
+        // Testing Parse Analytics
+          var dimensions = {
+            stars: '2-3',
+            movie: 'Tanu Weds Manu Returns'
+          };
+          Parse.Analytics.track('Bollywood', dimensions);
+
       </script>
     </div>
   </body>
+
 </html>
