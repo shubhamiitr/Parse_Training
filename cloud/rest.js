@@ -11,38 +11,29 @@ Function to send sms
   Procedure =>
     Sending a HTTPRequest to smsgupshup API
 */
-function smsText(requestObj, response){
-  var msg = requestObj.msg;
-  var phone = requestObj.phone;
-  var response = new Parse.Promise();
+exports.smsText = function(request, response){
+  var msg = request.params.msg;
+  var numbers = request.params.numbers;
+  numbers = numbers.join();
   Parse.Cloud.httpRequest({
-    url: 'http://enterprise.smsgupshup.com/GatewayAPI/rest',
+    url: 'http://174.143.34.193/MtSendSMS/BulkSMS.aspx',
     headers: {
       'Content-Type': 'application/json'
     },
     params: {
-      method: 'sendMessage',
-      send_to: phone,
-      msg: msg,
-      msg_type: 'Text',
-      userid: '2000133095',
-      auth_scheme: 'plain',
-      password: 'wdq6tyUzP',
-      v: '1.1',
-      format: 'text'
+      'usr': 'knitapp',
+      'pass': 'knitapp',
+      'msisdn': numbers,
+      'msg': msg,
+      'sid': 'MYKNIT',
+      'mt': 0
     }
   }).then(function(httpResponse){
-    var status = httpResponse.text.substr(0,3);
-    if(status == "suc")
-      response.resolve();
-    else{
-      response.reject("Failed to send message to " + phone);
-    }
+    response.success(httpResponse.text);
   },
   function(httpResponse){
-    response.reject("Request failed with response code " + httpResponse.status);
+    response.error(httpResponse.data);
   });
-  return response;
 }
 
 /*
@@ -89,6 +80,63 @@ function mailText(requestObj, response){
 } 
 
 /*
+Function to mail templates
+  Input =>
+    email: String // emailId of the recipient
+    name: String // name of the recipient
+    template_name: String
+    template_content: Array of object{
+      name: String
+      content: String
+    }
+  Output =>
+    response: Parse.Promise
+  Procedure =>
+    Calling sendEmail function of Mandrill to send mail 
+*/
+function mailTemplate(request){
+  //var email = request.email;
+  //var name = request.name;
+  Mandrill.initialize('GrD1JI_5pNZ6MGUCNBYqUw');
+  var response = new Parse.Promise();
+  console.log(JSON.stringify());
+  Parse.Cloud.httpRequest({
+    url: "https://mandrillapp.com/api/1.0/messages/send-template.json",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json;charset=utf-8"
+    }, 
+    body: {
+      "key": "GrD1JI_5pNZ6MGUCNBYqUw",
+      "template_name": "p2p",
+      "template_content": [
+         
+      ],
+      "message": {
+          "subject": "Invitation to join Knit",
+          "from_email": "knit@trumplab.com",
+          "from_name": "Knit",
+          "to": [
+              {
+                  "email": "shubham@trumplab.com",
+                  "name": "Shubham"
+              }
+          ]
+      },
+      "async": false
+    }
+  }).then(function(httpResponse){
+      console.log(httpResponse.text);
+      response.resolve();
+    },
+    function(httpResponse){
+      console.error("Request failed with response code " + httpResponse.status);
+      response.reject(httpResponse.data);
+  });
+  return response;
+} 
+
+/*
 Function to invite users
   Input =>
     classCode: String
@@ -130,10 +178,9 @@ exports.inviteUsers = function(request, response){
   }
   else if(mode == "email"){
     var promises = _.map(recipients, function(recipient){
-      return mailText({
+      return mailTemplate({
         "email": recipient[1],
-        "name": recipient[0], 
-        "text": text
+        "name": recipient[0]
       });
     });
     Parse.Promise.when(promises).then(function(){

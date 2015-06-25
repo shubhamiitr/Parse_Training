@@ -8,6 +8,19 @@
       <script type="text/javascript">
         Parse.initialize("6PdBHboWXHwa3En35mAXjrZtC783NpakLhMYjsfX","aOeco3V5BmGXvLZvgwQ62sQEbdjLxx7kq7kfu89s");
         
+        //Testing signUp function through HTTPRequest
+          Parse.Cloud.run("signUp",{
+            "username": "Shubham",
+            "password": "dsfds"
+          },{
+            success: function(success){
+              console.log(success);
+            },
+            error: function(error){
+              console.log(error);
+            }
+          });
+
         // Testing loadPdf function
           // Parse.Cloud.run("mailPdf",{
           //     url: "http://www.analysis.im/uploads/seminar/pdf-sample.pdf"
@@ -41,14 +54,14 @@
           // });
 
         // Testing insertReview function
-          Parse.Cloud.run("insertReview",{movie: "Tanu Weds Manu Returns", stars: 4, comment: "Ok!"},{
-            success: function(){
+          // Parse.Cloud.run("insertReview",{movie: "Tanu Weds Manu Returns", stars: 4, comment: "Ok!"},{
+          //   success: function(){
 
-            },
-            error: function(error){
-              console.log(error.code + ": " + error.message);
-            }
-          }); 
+          //   },
+          //   error: function(error){
+          //     console.log(error.code + ": " + error.message);
+          //   }
+          // }); 
 
         // Testing averageStars function
           // Parse.Cloud.run("averageStars",{movie: "The Matrix"},{
@@ -81,11 +94,11 @@
           // });  
 
         // Testing Parse Analytics
-          var dimensions = {
-            stars: '2-3',
-            movie: 'Tanu Weds Manu Returns'
-          };
-          Parse.Analytics.track('Bollywood', dimensions);
+          // var dimensions = {
+          //   stars: '2-3',
+          //   movie: 'Tanu Weds Manu Returns'
+          // };
+          // Parse.Analytics.track('Bollywood', dimensions);
 
       </script>
     </div>
